@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { UserSelections, SavedConfig } from '../types';
-import { TASK_TYPES, DEPTH_OPTIONS, ROLES, RESOURCE_TYPES, CITATION_FORMATS, AUDIENCES, FORMATS } from '../constants';
+import { TASK_TYPES, DEPTH_OPTIONS, ROLES, DIAGRAM_TYPES, RESOURCE_TYPES, CITATION_FORMATS, AUDIENCES, FORMATS } from '../constants';
 import { ChevronDown, CheckSquare, Square, Sparkles, Save, FolderOpen, Trash2, X, PenTool } from 'lucide-react';
 
 interface Props {
@@ -260,6 +260,32 @@ export const PromptBuilderForm: React.FC<Props> = ({
             className={"mt-3 " + inputClasses}
           />
         )}
+        
+        {/* 5.5 Diagrams (New Section) */}
+        <SectionTitle>¿Deseas que agregue diagrama para explicar algún proceso?</SectionTitle>
+        <div className="space-y-4">
+          <div>
+            <label className="block text-sm font-medium text-stone-700 mb-1">Concepto a representar</label>
+            <input
+              type="text"
+              placeholder="Ej: Flujo de aprobación de documentos..."
+              value={selections.diagramConcept}
+              onChange={(e) => handleChange('diagramConcept', e.target.value)}
+              className={inputClasses}
+            />
+          </div>
+          <div className="relative">
+            <select
+              value={selections.diagramType}
+              onChange={(e) => handleChange('diagramType', e.target.value)}
+              className={selectClasses}
+            >
+              <option value="">No incluir diagrama</option>
+              {DIAGRAM_TYPES.map(t => <option key={t} value={t}>{t}</option>)}
+            </select>
+            <ChevronDown className="absolute right-3 top-3.5 h-5 w-5 text-stone-500 pointer-events-none" />
+          </div>
+        </div>
 
         {/* 6. Additional Resources */}
         <SectionTitle>¿Deseas que proporcione otros recursos adicionales?</SectionTitle>

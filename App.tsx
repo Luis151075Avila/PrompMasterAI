@@ -14,6 +14,8 @@ const INITIAL_SELECTIONS: UserSelections = {
   examples: '',
   role: '',
   roleOther: '',
+  diagramConcept: '',
+  diagramType: '',
   additionalResources: '',
   additionalResourcesOther: '',
   citationStyle: '',

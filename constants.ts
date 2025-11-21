@@ -28,6 +28,16 @@ export const ROLES = [
   "Otro"
 ];
 
+export const DIAGRAM_TYPES = [
+  "Diagrama de Secuencia (Sequence Diagram)",
+  "Diagrama de Actividad (Activity Diagram)",
+  "Diagrama de Clases (Class Diagram)",
+  "Diagrama de Componentes (Component Diagram)",
+  "Diagrama de Flujo (Flowchart)",
+  "Diagrama de Gantt (Gantt Chart)",
+  "Diagrama de Estado (State Diagram)"
+];
+
 export const RESOURCE_TYPES = [
   "Archivo referencias .bib",
   "Referencias RIS",

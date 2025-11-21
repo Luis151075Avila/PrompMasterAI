@@ -18,6 +18,17 @@ export const generateRefinedPrompt = async (selections: UserSelections): Promise
   const resources = selections.additionalResources === "Otro" ? selections.additionalResourcesOther : selections.additionalResources;
   const depth = selections.depth.join(", ");
   
+  // Format the diagram request string
+  let diagramRequest = "No solicitado";
+  if (selections.diagramType) {
+    diagramRequest = `Incluir ${selections.diagramType}`;
+    if (selections.diagramConcept) {
+      diagramRequest += ` para representar: "${selections.diagramConcept}"`;
+    }
+    // Add instruction for Mermaid.js if it's a diagram
+    diagramRequest += ". Si es posible, usar sintaxis Mermaid.js o ASCII art para la representación visual.";
+  }
+
   const systemInstruction = `
     Actúa como un Ingeniero de Prompts (Prompt Engineer) experto y de clase mundial.
     Tu objetivo es tomar los requisitos crudos de un usuario y reescribirlos en un PROMPT perfecto, detallado y optimizado para un Modelo de Lenguaje Grande (LLM).
@@ -25,7 +36,7 @@ export const generateRefinedPrompt = async (selections: UserSelections): Promise
     Estructura el prompt resultante para que incluya claramente:
     1. Rol (Persona)
     2. Contexto
-    3. Tarea Específica
+    3. Tarea Específica (incluyendo diagramas si se solicitan)
     4. Requisitos de Contenido y Recursos
     5. Restricciones, Estilo de Citación y Formato
     6. Tono y Audiencia
@@ -42,6 +53,7 @@ export const generateRefinedPrompt = async (selections: UserSelections): Promise
     - **Contexto:** ${selections.context || "No especificado"}
     - **Ejemplos de entrada (Contexto):** ${selections.examples || "Ninguno"}
     - **Rol a asumir:** ${role}
+    - **Requisito de Diagrama Visual:** ${diagramRequest}
     - **Recursos adicionales requeridos:** ${resources || "Ninguno"}
     - **Formato de citación:** ${selections.citationStyle || "No especificado"}
     - **Solicitud de ejemplos específicos en la salida:** ${selections.specificExamples || "No solicitado"}

@@ -7,6 +7,8 @@ export interface UserSelections {
   role: string;
   roleOther: string;
   // New fields
+  diagramConcept: string;
+  diagramType: string;
   additionalResources: string;
   additionalResourcesOther: string;
   citationStyle: string;
